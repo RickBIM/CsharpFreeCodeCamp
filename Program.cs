@@ -1,17 +1,8 @@
-﻿string[] names = { "Rowena", "Robin", "Bao" };
-foreach (string name in names)
+﻿string[] IDs = {"B123","C234","A345","C15","B177","G3003","C235","B179"};
+foreach (string ID in IDs)
 {
-    Console.WriteLine(name);
+    if (ID.StartsWith("B"))
+    {
+        Console.WriteLine($"The {ID} may be fraudulent");
+    }
 }
-
-int[] inventory = { 200, 450, 700, 175, 250 };
-int sum = 0;
-int bin = 0;
-foreach (int items in inventory)
-{
-    sum += items;
-    bin++;
-    Console.WriteLine($"Bin {bin} = {items} items (Running total: {sum})");
-}
-
-Console.WriteLine($"We have {sum} items in inventory.");
