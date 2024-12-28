@@ -1,20 +1,19 @@
-﻿string customerName = "Ms. Barros";
+﻿const string input = "<div><h2>Widgets &trade;</h2><span>5000</span></div>";
 
-string currentProduct = "Magic Yield";
-int currentShares = 2975000;
-decimal currentReturn = 0.1275m;
-decimal currentProfit = 55000000.0m;
+string quantity = "";
+string output = "";
 
-string newProduct = "Glorious Future";
-decimal newReturn = 0.13125m;
-decimal newProfit = 63000000.0m;
-// Your logic here
-Console.WriteLine($"Dear {customerName},");
-Console.WriteLine($"As a customer of our {currentProduct} offreting we are excited to tell you about a new financial product that would dramatically increase your return.");
-Console.WriteLine();
-Console.WriteLine($"Currently, you own {currentShares:N} shares at a return of {currentReturn:P2}.");
-Console.WriteLine();
-Console.WriteLine($"Our new product, {newProduct} offers a return of {newReturn:P2}.  Given your current volume, your potencial profit would be {newProfit:C}");
-Console.WriteLine("Here's a quick comparison:\n");
-Console.WriteLine($"{currentProduct} \t\t {currentReturn:P2} \t {currentProfit:C}");
-Console.WriteLine($"{newProduct} \t {newReturn:P2} \t {newProfit:C}");
+// Your work here
+
+int startPosition  = input.IndexOf("<span>") + "<span>".Length;
+int endPosition = input.IndexOf("</span>");
+int length = endPosition - startPosition;
+quantity = input.Substring(startPosition, length);
+Console.WriteLine(quantity);
+
+startPosition  = input.IndexOf("<div>") + "<div>".Length;
+endPosition = input.IndexOf("</div>");
+length = endPosition - startPosition;
+output = input.Substring(startPosition, length);
+output = output.Replace("&trade", "&reg");
+Console.WriteLine(output);
