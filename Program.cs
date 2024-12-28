@@ -1,14 +1,20 @@
-﻿string orderStream = "B123,C234,A345,C15,B177,G3003,C235,B179";
-string[] orders = orderStream.Split(",");
-Array.Sort(orders);
-foreach (string order in orders)
-{
-    if (order.Length != 4)
-    {
-        Console.WriteLine($"{order} \t - Error");
-    }
-    else
-    {
-        Console.WriteLine(order);
-    }
-}
+﻿string customerName = "Ms. Barros";
+
+string currentProduct = "Magic Yield";
+int currentShares = 2975000;
+decimal currentReturn = 0.1275m;
+decimal currentProfit = 55000000.0m;
+
+string newProduct = "Glorious Future";
+decimal newReturn = 0.13125m;
+decimal newProfit = 63000000.0m;
+// Your logic here
+Console.WriteLine($"Dear {customerName},");
+Console.WriteLine($"As a customer of our {currentProduct} offreting we are excited to tell you about a new financial product that would dramatically increase your return.");
+Console.WriteLine();
+Console.WriteLine($"Currently, you own {currentShares:N} shares at a return of {currentReturn:P2}.");
+Console.WriteLine();
+Console.WriteLine($"Our new product, {newProduct} offers a return of {newReturn:P2}.  Given your current volume, your potencial profit would be {newProfit:C}");
+Console.WriteLine("Here's a quick comparison:\n");
+Console.WriteLine($"{currentProduct} \t\t {currentReturn:P2} \t {currentProfit:C}");
+Console.WriteLine($"{newProduct} \t {newReturn:P2} \t {newProfit:C}");
