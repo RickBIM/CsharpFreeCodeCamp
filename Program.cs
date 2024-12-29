@@ -1,37 +1,61 @@
-﻿string[,] corporate =
+﻿using System;
+
+string[] pettingZoo =
 {
-    {"Robert", "Bavin"},
-    {"Simon", "Bright"},
-    {"Kim", "Sinclair"},
-    {"Aashrita", "Kamath"},
-    {"Sarah", "Delucchi"},
-    {"Sinan", "Ali"}
+	"alpacas", "capybaras", "chickens", "ducks", "emus", "geese",
+	"goats", "iguanas", "kangaroos", "lemurs", "llamas", "macaws",
+	"ostriches", "pigs", "ponies", "rabbits", "sheep", "tortoises",
 };
 
-string[,] external =
+// RandomizeAnimals();
+void RandomizeAnimals()
 {
-    {"Vinnie", "Ashton"}, {"Cody", "Dysart"},
-    {"Shay", "Lawrence"}, {"Daren", "Valdes"}
-};
-
-string externalDomain = "hayworth.com";
-
-for (int i = 0; i < corporate.GetLength(0); i++)
+	Random random = new Random();
+	for (int i = 0; i < pettingZoo.Length; i++)
+	{
+		int r = random.Next(i, pettingZoo.Length);
+		string temp = pettingZoo[i];
+		pettingZoo[i] = pettingZoo[r];
+		pettingZoo[r] = temp;
+	}
+}
+// string[,] group = AssignGroup();
+string[,] AssignGroup(int groups = 6)
 {
-    DisplayCorporateEmail(corporate[i, 0], corporate[i, 1]);
+	string[,] result = new string[groups, pettingZoo.Length / groups];
+	int start = 0;
+	for (int i = 0; i < groups; i++)
+	{
+		for (int j = 0; j < result.GetLength(1); j++)
+		{
+			result[i, j] = pettingZoo[start++];
+		}
+	}
+	return result;
 }
 
-for (int i = 0; i < external.GetLength(0); i++)
+void PrintGroup(string[,] group) 
 {
-    DisplayExternalEmail(external[i, 0], external[i, 1]);
+    for (int i = 0; i < group.GetLength(0); i++) 
+    {
+        Console.Write($"Group {i + 1}: ");
+        for (int j = 0; j < group.GetLength(1); j++) 
+        {
+            Console.Write($"{group[i,j]}  ");
+        }
+        Console.WriteLine();
+    }
 }
 
-void DisplayCorporateEmail(string name, string lastName)
+void PlanSchoolVisit(string schoolName, int groups = 6)
 {
-    Console.WriteLine($"{name.Substring(0, 2).ToLower()}{lastName.ToLower()}@contoso.com");
+    RandomizeAnimals();
+    string[,] group = AssignGroup(groups);
+    Console.WriteLine(schoolName);
+    PrintGroup(group);
 }
 
-void DisplayExternalEmail(string name, string lastName)
-{
-    Console.WriteLine($"{name.Substring(0, 2).ToLower()}{lastName.ToLower()}@contoso.com");
-}
+
+PlanSchoolVisit("School A");
+PlanSchoolVisit("School B", 3);
+PlanSchoolVisit("School C", 2);
