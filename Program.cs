@@ -115,6 +115,10 @@ static void LoadTillEachMorning(int[,] registerDailyStartingCash, int[] cashTill
 
 static void MakeChange(int cost, int[] cashTill, int twenties, int tens = 0, int fives = 0, int ones = 0)
 {
+    int cashTillTwenties = cashTill[3];
+    int cashTillTens = cashTill[2];
+    int cashTillFives = cashTill[1];
+    int cashTillOnes = cashTill[0];
     cashTill[3] += twenties;
     cashTill[2] += tens;
     cashTill[1] += fives;
@@ -124,8 +128,13 @@ static void MakeChange(int cost, int[] cashTill, int twenties, int tens = 0, int
     int changeNeeded = amountPaid - cost;
 
     if (changeNeeded < 0)
+    {
+        cashTill[3] = cashTillTwenties;
+        cashTill[2] = cashTillTens;
+        cashTill[1] = cashTillFives;
+        cashTill[0] = cashTillOnes;
         throw new InvalidOperationException("InvalidOperationException: Not enough money provided to complete the transaction.");
-
+    }
     Console.WriteLine("Cashier prepares the following change:");
 
     while ((changeNeeded > 19) && (cashTill[3] > 0))
@@ -157,8 +166,13 @@ static void MakeChange(int cost, int[] cashTill, int twenties, int tens = 0, int
     }
 
     if (changeNeeded > 0)
+    {
+        cashTill[3] = cashTillTwenties;
+        cashTill[2] = cashTillTens;
+        cashTill[1] = cashTillFives;
+        cashTill[0] = cashTillOnes;
         throw new InvalidOperationException("InvalidOperationException: The till is unable to make change for the cash provided.");
-
+    }
 }
 
 static void LogTillStatus(int[] cashTill)
@@ -174,5 +188,4 @@ static void LogTillStatus(int[] cashTill)
 static string TillAmountSummary(int[] cashTill)
 {
     return $"The till has {cashTill[3] * 20 + cashTill[2] * 10 + cashTill[1] * 5 + cashTill[0]} dollars";
-
 }
